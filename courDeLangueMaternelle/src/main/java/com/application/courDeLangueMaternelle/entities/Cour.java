@@ -21,7 +21,7 @@ public class Cour implements Serializable {
 	private String lieuCour;
 	private Langue langueDispense;
 	private List<Participant> participants;
-	private List<Utilisateur> professeurs;
+	private Utilisateur professeurs;
 	private boolean isDispend;
 	
 	

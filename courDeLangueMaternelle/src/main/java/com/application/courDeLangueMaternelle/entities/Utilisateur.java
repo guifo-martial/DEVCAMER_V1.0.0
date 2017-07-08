@@ -22,6 +22,7 @@ public class Utilisateur implements Serializable {
 	private String prenom;
 	private String mail;
 	private List<Roles> roles;
+	private Account account ;
 	/**
 	 * 
 	 */
@@ -98,6 +99,21 @@ public class Utilisateur implements Serializable {
 	 */
 	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the account
+	 */
+	public Account getAccount() {
+		return account;
+	}
+
+
+	/**
+	 * @param account the account to set
+	 */
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	

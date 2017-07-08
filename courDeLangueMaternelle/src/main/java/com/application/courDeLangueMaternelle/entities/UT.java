@@ -21,6 +21,7 @@ public class UT implements Serializable {
 	private Long idUT;
 	private Date dateUT;
 	private List<Cour> cours;
+	private Session session;
 
 	/**
 	 * 
@@ -78,6 +79,20 @@ public class UT implements Serializable {
 	 */
 	public void setCours(List<Cour> cours) {
 		this.cours = cours;
+	}
+
+	/**
+	 * @return the session
+	 */
+	public Session getSession() {
+		return session;
+	}
+
+	/**
+	 * @param session the session to set
+	 */
+	public void setSession(Session session) {
+		this.session = session;
 	}
 
 	
