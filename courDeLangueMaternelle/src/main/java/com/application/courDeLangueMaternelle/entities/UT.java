@@ -7,10 +7,24 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import javax.persistence.Table;
+
 /**
  * @author guifo
  *
  */
+@Entity
+@Table(name="UT")
 public class UT implements Serializable {
 
 	/**
@@ -18,10 +32,32 @@ public class UT implements Serializable {
 	 */
 	private static final long serialVersionUID = 7606993853070865453L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private Long idUT;
 	private Date dateUT;
+	@ManyToMany
+	@JoinTable(name="UT_COUR")
 	private List<Cour> cours;
+	@ManyToOne
+	@JoinColumn(name="CODE_SESSION")
 	private Session session;
+	
+	
+
+	/**
+	 * @return the session
+	 */
+	public Session getSession() {
+		return session;
+	}
+
+	/**
+	 * @param session the session to set
+	 */
+	public void setSession(Session session) {
+		this.session = session;
+	}
 
 	/**
 	 * 
@@ -34,9 +70,10 @@ public class UT implements Serializable {
 	 * @param dateUT
 	 * @param cours
 	 */
-	public UT(Date dateUT, List<Cour> cours) {
+	public UT(Date dateUT, List<Cour> cours, Session session) {
 		this.dateUT = dateUT;
 		this.cours = cours;
+		this.session = session;
 	}
 
 	/**
@@ -79,20 +116,6 @@ public class UT implements Serializable {
 	 */
 	public void setCours(List<Cour> cours) {
 		this.cours = cours;
-	}
-
-	/**
-	 * @return the session
-	 */
-	public Session getSession() {
-		return session;
-	}
-
-	/**
-	 * @param session the session to set
-	 */
-	public void setSession(Session session) {
-		this.session = session;
 	}
 
 	

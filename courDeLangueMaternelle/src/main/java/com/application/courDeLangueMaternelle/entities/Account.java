@@ -6,10 +6,19 @@ package com.application.courDeLangueMaternelle.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author guifo
  *
  */
+@Entity
+@Table(name="ACCOUNT")
 public class Account implements Serializable {
 
 	/**
@@ -17,13 +26,17 @@ public class Account implements Serializable {
 	 */
 	private static final long serialVersionUID = 7827902443526893262L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private Long idAccount;
+	@Column(name="LOGIN")
 	private String login;
+	@Column(name="PASSWORD")
 	private String password;
 	private Date  dateCreation;
 	private Date  dateLastLogin;
 	private boolean isActive;
-	private Utilisateur user;
+	
 
 	/**
 	 * 
@@ -42,15 +55,15 @@ public class Account implements Serializable {
 	 * @param isActive
 	 * @param user
 	 */
-	public Account(String login, String password, Date dateCreation, Date dateLastLogin, boolean isActive,
-			Utilisateur user) {
+	public Account(String login, String password, Date dateCreation,
+			Date dateLastLogin, boolean isActive) {
 		super();
 		this.login = login;
 		this.password = password;
 		this.dateCreation = dateCreation;
 		this.dateLastLogin = dateLastLogin;
 		this.isActive = isActive;
-		this.user = user;
+	
 	}
 
 
@@ -139,19 +152,7 @@ public class Account implements Serializable {
 		this.isActive = isActive;
 	}
 
-	/**
-	 * @return the user
-	 */
-	public Utilisateur getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(Utilisateur user) {
-		this.user = user;
-	}
+	
 	
 	
 

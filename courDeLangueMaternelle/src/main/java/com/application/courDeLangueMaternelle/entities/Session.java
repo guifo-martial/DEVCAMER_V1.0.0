@@ -7,10 +7,21 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * @author guifo
  *
  */
+@Entity
+@Table(name="SESSION")
 public class Session implements Serializable {
 
 	/**
@@ -18,9 +29,14 @@ public class Session implements Serializable {
 	 */
 	private static final long serialVersionUID = 273675027650004389L;
 	
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
+	@Column(name="CODE_SESSION")
 	private Long idSession;
 	private Date dateDebut;
 	private Date dateFin;
+	@OneToMany(mappedBy="session",fetch=FetchType.LAZY)
 	private List<UT> uts;
 	
 	

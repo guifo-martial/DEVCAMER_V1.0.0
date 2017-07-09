@@ -6,10 +6,23 @@ package com.application.courDeLangueMaternelle.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  * @author guifo
  *
  */
+
+@Entity
+@Table(name="COUR")
 public class Cour implements Serializable {
 
 	/**
@@ -17,10 +30,18 @@ public class Cour implements Serializable {
 	 */
 	private static final long serialVersionUID = -6747491684129358910L;
 	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY )
 	private Long idCour;
 	private String lieuCour;
+	@OneToOne(cascade = CascadeType.ALL)
 	private Langue langueDispense;
-	private List<Participant> participants;
+	@ManyToMany
+	@JoinTable(name="Participants")
+	private List<Utilisateur> participants;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Utilisateur professeurs;
 	private boolean isDispend;
 	
@@ -47,7 +68,7 @@ public class Cour implements Serializable {
 	 * @param participants
 	 * @param professeurs
 	 */
-	public Cour(String lieuCour, Langue langueDispense, List<Participant> participants, List<Utilisateur> professeurs) {
+	public Cour(String lieuCour, Langue langueDispense, List<Utilisateur> participants, Utilisateur professeurs) {
 		this.lieuCour = lieuCour;
 		this.langueDispense = langueDispense;
 		this.participants = participants;
@@ -128,7 +149,7 @@ public class Cour implements Serializable {
 	/**
 	 * @return the participants
 	 */
-	public List<Participant> getParticipants() {
+	public List<Utilisateur> getParticipants() {
 		return participants;
 	}
 
@@ -137,7 +158,7 @@ public class Cour implements Serializable {
 	/**
 	 * @param participants the participants to set
 	 */
-	public void setParticipants(List<Participant> participants) {
+	public void setParticipants(List<Utilisateur> participants) {
 		this.participants = participants;
 	}
 
@@ -146,7 +167,7 @@ public class Cour implements Serializable {
 	/**
 	 * @return the professeurs
 	 */
-	public List<Utilisateur> getProfesseurs() {
+	public Utilisateur getProfesseurs() {
 		return professeurs;
 	}
 
@@ -155,7 +176,7 @@ public class Cour implements Serializable {
 	/**
 	 * @param professeurs the professeurs to set
 	 */
-	public void setProfesseurs(List<Utilisateur> professeurs) {
+	public void setProfesseurs(Utilisateur professeurs) {
 		this.professeurs = professeurs;
 	}
 
